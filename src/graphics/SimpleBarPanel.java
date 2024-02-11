@@ -1,122 +1,73 @@
 package graphics;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.Toolkit.*;
-import javax.swing.*;
-import java.io.*;
-import java.util.*;
+import java.util.Arrays;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.stage.Stage;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 
-
-public class SimpleBarchart extends JFrame
-{
-    private final int OUTER_MARGIN = 20;
-    private static final Color BACKGROUND_COLOR = Color.white;
-    private static final Color BAR_COLOR = Color.red; 
-    private int SPACE_ON_LEFT_RIGHT;
-    private Image fImageBuffer;
-    private Insets fInsets;
-    private Graphics g;
-    private Bar[] bars;
-    private static int SLEEP = 500;
-    private int[] inputData;
-
-
-class Bar
-{
-    private int height, value;
-    public int width;
-    public int nwx;
-    public int nwy;
-    public Color color;
-
-    public Bar() {}
-    public Bar(int height, int width, int value, int nwx, int nwy)
-    {
-        this.height = height;
-        this.width = width; 
-        this.value = value; 
-        this.nwx = nwx;
-        this.nwy = nwy;
-    }
-
-}
-
-
-public SimpleBarchart(final int[] inputData)
-{
-    this.inputData = inputData;
-    addWindowListener(new WindowCloser());
-    fInsets = getInsets();
-    setSize(WIDTH + fInsets.left + fInsets.right, HEIGHT + fInsets.top + fInsets.bottom);
-    setTitle("Bar Chart");
-    if (((fImageBuffer = createImage(WIDTH, HEIGHT)) == null) ||
-            ((g = fImageBuffer.getGraphics()) == null))
-            System.exit(1);
-    readData();
-    createBars();
-    getContentPane().add(new SimpleBarchart(inputData), BorderLayout.CENTER);
-    setVisible(true);
-}
-
-/**
- *
- * @param g
- */
-protected void paintComponent(final Graphics g) {
-    g.drawImage(fImageBuffer, fInsets.left, fInsets.top, null);
-}
-
-class WindowCloser extends WindowAdapter
-{
+public class BarChartExample extends Application {
     @Override
-    public void windowClosing(WindowEvent e)
-    {
-        System.exit(0);
+    public void start(Stage stage) {
+        //Defining the axes
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setCategories(FXCollections.<String>
+                observableArrayList(Arrays.asList("Speed", "User rating", "Milage", "Safety")));
+        xAxis.setLabel("category");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("score");
+
+        //Creating the Bar chart
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Comparison between various cars");
+
+        //Prepare XYChart.Series objects by setting data
+        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+        series1.setName("Fiat");
+        series1.getData().add(new XYChart.Data<>("Speed", 1.0));
+        series1.getData().add(new XYChart.Data<>("User rating", 3.0));
+        series1.getData().add(new XYChart.Data<>("Milage", 5.0));
+        series1.getData().add(new XYChart.Data<>("Safety", 5.0));
+
+        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
+        series2.setName("Audi");
+        series2.getData().add(new XYChart.Data<>("Speed", 5.0));
+        series2.getData().add(new XYChart.Data<>("User rating", 6.0));
+        series2.getData().add(new XYChart.Data<>("Milage", 10.0));
+        series2.getData().add(new XYChart.Data<>("Safety", 4.0));
+
+        XYChart.Series<String, Number> series3 = new XYChart.Series<>();
+        series3.setName("Ford");
+        series3.getData().add(new XYChart.Data<>("Speed", 4.0));
+        series3.getData().add(new XYChart.Data<>("User rating", 2.0));
+        series3.getData().add(new XYChart.Data<>("Milage", 3.0));
+        series3.getData().add(new XYChart.Data<>("Safety", 6.0));
+
+        //Setting the data to bar chart
+        barChart.getData().addAll(series1, series2, series3);
+
+        //Creating a Group object
+        Group root = new Group(barChart);
+
+        //Creating a scene object
+        Scene scene = new Scene(root, 600, 400);
+
+        //Setting title to the Stage
+        stage.setTitle("Bar Chart");
+
+        //Adding scene to the stage
+        stage.setScene(scene);
+
+        //Displaying the contents of the stage
+        stage.show();
     }
-}
-
-private void readData()
-{
-    String[] inputItems = JOptionPane.showInputDialog("Enter 1 to 9 integers > 0").trim().split(" +");
-    int numData = inputItems.length;
-    inputData = new int[numData];
-
-    for (int itemIndex = 0; itemIndex < inputItems.length; itemIndex++)
-        inputData[itemIndex] = numData;
-
-
-}
-
-private void createBars()
-{
-
-//Im confused on how to create the bars for this program. 
-//This function requires 25 pixels of space on top and bottom of the display-    window, 10 pixels between the bars, and has to allow bar-heights to be **scaled to the form of inputData items.** 
-
-    Bar[] bars = new Bar[];
-    int pixelBetweenBars = 25;
-    int width = 800 + 2*OUTER_MARGIN;
-    int height = 600 + 2*OUTER_MARGIN;
-
-}
-
-private void drawBars(final Graphics g)
-{
-            int OUTER_MARGIN = 20,
-            WIDTH = 800 + 2 * OUTER_MARGIN,
-            HEIGHT = 600 + 2 * OUTER_MARGIN;
-
-
-    g.setColor(BACKGROUND_COLOR);
-    g.fillRect(0, 0, WIDTH, HEIGHT);
-
-    g.setColor(BAR_COLOR);
-    final int barWidth = 20;
-    for (int itemIndex = 0; itemIndex < inputData.length; itemIndex++) {
-        final int x = OUTER_MARGIN + 25 * itemIndex;
-        final int barHeight = 10 * inputData[itemIndex];
-        final int y = barHeight;
-        g.fillRect(x, y, barWidth, barHeight);
+    public static void main(String args[]){
+        launch(args);
     }
 }
