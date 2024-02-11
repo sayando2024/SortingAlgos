@@ -5,19 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0488c97-f5eb-453b-bcf5-a12dc15c3e8c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/sorting/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sorting/BubbleSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx_swt1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphics/NewBarGraph.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/graphics/SwappingValueBarGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SortingAlgos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SortingAlgos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/SimpleBarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/SimpleBarPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sorting/MyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sorting/MyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/testing/DrawChart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/testing/DrawChart.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2cCbTYirgKumCjA08rx3Dl7BRs6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,13 +42,85 @@
   "keyToString": {
     "Application.BubbleSort.executor": "Run",
     "Application.DemoSorting.executor": "Run",
+    "Application.MyTest.executor": "Run",
+    "Application.NewBarGraph.executor": "Run",
+    "Application.SimpleBarPanel.executor": "Run",
+    "Application.SwappingValueBarGraph.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "/Users/sayanmalik/SortingAlgos/src/Main.java"
+    "onboarding.tips.debug.path": "/Users/sayanmalik/SortingAlgos/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RunManager" selected="Application.NewBarGraph">
+    <configuration name="MyTest" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sorting.MyTest" />
+      <module name="SortingAlgos" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../javafx-sdk-21.0.2/lib --add-modules=javafx.controls" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sorting.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NewBarGraph" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="graphics.NewBarGraph" />
+      <module name="SortingAlgos" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../javafx-sdk-21.0.2/lib --add-modules=javafx.controls" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graphics.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SimpleBarPanel" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="graphics.SimpleBarPanel" />
+      <module name="SortingAlgos" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$PROJECT_DIR$/../javafx-sdk-21.0.2/lib&quot; --add-modules=javafx.controls" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graphics.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SwappingValueBarGraph" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="graphics.SwappingValueBarGraph" />
+      <module name="SortingAlgos" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../javafx-sdk-21.0.2/lib --add-modules=javafx.controls" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="graphics.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SimpleBarPanel" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -51,5 +138,15 @@
       <updated>1707618518975</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

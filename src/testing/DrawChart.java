@@ -1,7 +1,7 @@
 package testing;
 
-import graphics.SimpleBarPanel;
 import java.util.*;
+import graphics.SimpleBarPanel;
 
 public class DrawChart {
 
@@ -14,7 +14,7 @@ public class DrawChart {
 		    inputData[itemIndex] = randomNumber;
 		}
 		// TODO Auto-generated method stub
-		SimpleBarPanel simpBar = new SimpleBarPanel(inputData);
+
 		
 	}
 
