@@ -39,48 +39,74 @@ public class SimpleBarPanel extends Application {
         return t;
     });
 
-    static XYChart.Series<String, Number> series;
-    static BarChart<String, Number> bc;
-    Button sort = new Button("Sort");
+    private ExecutorService exec1 = Executors.newCachedThreadPool(runnable -> {
+        Thread t = new Thread(runnable);
+        t.setDaemon(true);
+        return t;
+    });
 
-    public static void updateChart() {
-        createSeries();
-        bc.getData().removeAll();
-        bc.getData().addAll(series);
-    }
+    private ExecutorService exec2 = Executors.newCachedThreadPool(runnable -> {
+        Thread t = new Thread(runnable);
+        t.setDaemon(true);
+        return t;
+    });
+
+    static Series<String, Number> series;
+    static Series<String, Number> series1;
+    static Series<String, Number> series2;
 
     //@Override
     public void start(Stage stage) {
         //Defining the axes
         CategoryAxis xAxis = new CategoryAxis();
-
+        CategoryAxis xAxis1 = new CategoryAxis();
+        CategoryAxis xAxis2 = new CategoryAxis();
 
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("value");
+        NumberAxis yAxis1 = new NumberAxis();
+        yAxis1.setLabel("value");
+        NumberAxis yAxis2 = new NumberAxis();
+        yAxis2.setLabel("value");
 
         //Creating the Bar chart
         BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        bc = barChart;
+        BarChart<String, Number> barChart1 = new BarChart<>(xAxis1, yAxis1);
+        BarChart<String, Number> barChart2 = new BarChart<>(xAxis2, yAxis2);
+
 
         //Prepare XYChart.Series objects by setting data
-        createSeries();
+        series = createSeries();
+        series1 = createSeries();
+        series2 = createSeries();
 
         //Setting the data to bar chart
         barChart.getData().addAll(series);
+        barChart1.getData().addAll(series1);
+        barChart2.getData().addAll(series2);
         
         barChart.setBarGap(0);
+        barChart1.setBarGap(0);
+        barChart2.setBarGap(0);
 
-       // Task<Void> sortingAlgoTask = createBubleSortingTask(series);
-        Task<Void> sortingAlgoTask = createInsertSortingTask(series);
-        
-        exec.submit(sortingAlgoTask);
-        
+        Task<Void> sortingAlgoTask = createSelectionSortingTask(series);
+        Task<Void> sortingAlgoTask1 = createBubbleSortingTask(series1);
+        Task<Void> sortingAlgoTask2 = createInsertionSortingTask(series2);
+
+
+
         //Creating a Group object
         BorderPane root = new BorderPane(barChart);
-        
+        BorderPane root1 = new BorderPane(barChart1);
+        BorderPane root2 = new BorderPane(barChart2);
+
+        HBox hbox = new HBox(0);
+        hbox.getChildren().addAll(root);
+//        hbox.getChildren().addAll(root1);
+//        hbox.getChildren().addAll(root2);
        
         //Creating a scene object
-        Scene scene = new Scene(root, 1000, 800);
+        Scene scene = new Scene(hbox, 1000, 800);
 
         //Setting title to the Stage
         stage.setTitle("Bar Chart");
@@ -88,23 +114,36 @@ public class SimpleBarPanel extends Application {
         //Adding scene to the stage
         stage.setScene(scene);
 
+
         //Displaying the contents of the stage
         stage.show();
+
+        try {
+            exec.submit(sortingAlgoTask);
+//            exec1.submit(sortingAlgoTask1);
+//            exec2.submit(sortingAlgoTask2);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            System.out.println("Program executed successfully!");
+        }
+
     }
 
-    private Task<Void> createBubleSortingTask(Series<String, Number> series) {
+    private Task<Void> createBubbleSortingTask(Series<String, Number> seriesCur) {
         return new Task<Void>() {
             @Override
             protected Void call() throws Exception {
 
-                ObservableList<Data<String, Number>> data = series.getData();
+                ObservableList<Data<String, Number>> data = seriesCur.getData();
                 for (int i = data.size() - 1; i >= 0; i--) {
                     for (int j = 0 ; j < i; j++) {
 
                         Data<String, Number> first = data.get(j);
                         Data<String, Number> second = data.get(j + 1);
 
-                       Thread.sleep(50);
 
                        first.getNode().setStyle("-fx-background-color: green ;");
                        second.getNode().setStyle("-fx-background-color: green ;");
@@ -114,7 +153,7 @@ public class SimpleBarPanel extends Application {
                             first.setYValue(second.getYValue().doubleValue());
                             second.setYValue(temp);
                         }
-                        Thread.sleep(500);
+                        Thread.sleep(75);
                         
                         first.getNode().setStyle("-fx-background-color: red ;");
                         second.getNode().setStyle("-fx-background-color: red ;");
@@ -126,12 +165,12 @@ public class SimpleBarPanel extends Application {
         };
     }
     
-    private Task<Void> createInsertSortingTask(Series<String, Number> series) {
+    private Task<Void> createInsertionSortingTask(Series<String, Number> seriesCur) {
         return new Task<Void>() {
             @Override
             protected Void call() throws Exception {
 
-                ObservableList<Data<String, Number>> data = series.getData();
+                ObservableList<Data<String, Number>> data = seriesCur.getData();
                 
                 int n = data.size();  
                 for (int j = 1; j < n; j++) {  
@@ -155,9 +194,9 @@ public class SimpleBarPanel extends Application {
                     
                     data.get(i+1).setYValue(key);
                     
-                    Thread.sleep(500);
+                    Thread.sleep(75);
                     
-                    first.getNode().setStyle("-fx-background-color: red ;");
+
                    // second.getNode().setStyle("-fx-background-color: red ;");
                 }  
                 
@@ -165,27 +204,60 @@ public class SimpleBarPanel extends Application {
             }
         };
     }
+
+    private Task<Void> createSelectionSortingTask(Series<String, Number> seriesCur) {
+        return new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+
+                ObservableList<Data<String, Number>> data = seriesCur.getData();
+
+                int n = data.size();
+
+                for (int i = 0; i < n; i++) {
+                    //Double smallestNum = Double.MAX_VALUE;
+                    Data<String, Number> key = data.get(i);
+                    for (int j = i+1; j < n; j++) {
+                        Double temp;
+
+                        //data.get(j).getNode().setStyle("-fx-background-color: green ;");
+                        //data.get(i).getNode().setStyle("-fx-background-color: green ;");
+                        Thread.sleep(75);
+
+
+                        if ( key.getYValue().doubleValue() > data.get(j).getYValue().doubleValue() )  {
+                            temp = key.getYValue().doubleValue();
+                            key.setYValue(data.get(j).getYValue());
+                            data.get(j).setYValue(temp);
+                        }
+                        //data.get(j).getNode().setStyle("-fx-background-color: red ;");
+                        //key.getNode().setStyle("-fx-background-color: red ;");
+
+                    }
+                    data.get(i).getNode().setStyle("-fx-background-color: purple ;");
+                }
+
+                return null;
+            }
+        };
+    }
     
-    public static void createSeries() {
-        XYChart.Series<String, Number> series1 = new XYChart.Series<>();
-        series1.setName("Index");
-        for (int i = 0; i < 50; i++) {
+    public static Series<String,Number> createSeries() {
+        Series<String, Number> seriesL = new Series<>();
+        seriesL.setName("Index");
+        for (int i = 0; i < 20; i++) {
 //            xAxis.setCategories(FXCollections.<String>
 //                    observableArrayList(Arrays.asList("Order")));
-            Number randomNumber = (Math.random() * 100);
-            series1.getData().add(new XYChart.Data<>("" + i, randomNumber));
+            Number randomNumber = (Math.random() * 1000);
+            seriesL.getData().add(new Data<>("" + i, randomNumber));
         }
 
-        series = series1;
+        return seriesL;
     }
 
     
     public static void main(String args[]) throws InterruptedException {
         launch(args);
-       // NewThread t = new NewThread();
-       // t.start();
-       // System.out.println("I want to execute something here");
-       // launch(args);
     }
 
 }
