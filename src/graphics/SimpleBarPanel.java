@@ -102,8 +102,8 @@ public class SimpleBarPanel extends Application {
 
         HBox hbox = new HBox(0);
         hbox.getChildren().addAll(root);
-//        hbox.getChildren().addAll(root1);
-//        hbox.getChildren().addAll(root2);
+        hbox.getChildren().addAll(root1);
+        hbox.getChildren().addAll(root2);
        
         //Creating a scene object
         Scene scene = new Scene(hbox, 1000, 800);
@@ -120,8 +120,8 @@ public class SimpleBarPanel extends Application {
 
         try {
             exec.submit(sortingAlgoTask);
-//            exec1.submit(sortingAlgoTask1);
-//            exec2.submit(sortingAlgoTask2);
+            exec1.submit(sortingAlgoTask1);
+            exec2.submit(sortingAlgoTask2);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -220,21 +220,26 @@ public class SimpleBarPanel extends Application {
                     for (int j = i+1; j < n; j++) {
                         Double temp;
 
-                        //data.get(j).getNode().setStyle("-fx-background-color: green ;");
-                        //data.get(i).getNode().setStyle("-fx-background-color: green ;");
+                        data.get(j).getNode().setStyle("-fx-background-color: green ;");
+                        data.get(i).getNode().setStyle("-fx-background-color: green ;");
                         Thread.sleep(75);
 
 
                         if ( key.getYValue().doubleValue() > data.get(j).getYValue().doubleValue() )  {
+//                            System.out.println(data.get(i));
+//                            System.out.println(data.get(j));
+
                             temp = key.getYValue().doubleValue();
                             key.setYValue(data.get(j).getYValue());
                             data.get(j).setYValue(temp);
                         }
-                        //data.get(j).getNode().setStyle("-fx-background-color: red ;");
-                        //key.getNode().setStyle("-fx-background-color: red ;");
+
+                        data.get(i).getNode().setStyle("-fx-background-color: red ;");
+                        data.get(j).getNode().setStyle("-fx-background-color: red ;");
 
                     }
                     data.get(i).getNode().setStyle("-fx-background-color: purple ;");
+                    System.out.println(data.get(i));
                 }
 
                 return null;
@@ -245,10 +250,10 @@ public class SimpleBarPanel extends Application {
     public static Series<String,Number> createSeries() {
         Series<String, Number> seriesL = new Series<>();
         seriesL.setName("Index");
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 15; i++) {
 //            xAxis.setCategories(FXCollections.<String>
 //                    observableArrayList(Arrays.asList("Order")));
-            Number randomNumber = (Math.random() * 1000);
+            Number randomNumber = (int) (Math.random() * 1000);
             seriesL.getData().add(new Data<>("" + i, randomNumber));
         }
 
