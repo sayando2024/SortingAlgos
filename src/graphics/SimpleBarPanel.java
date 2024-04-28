@@ -268,16 +268,7 @@ public class SimpleBarPanel extends Application {
             Number randomNumber = (int) (Math.random() * 1000);
             seriesL.getData().add(new Data<>("" + i, randomNumber));
         }
-//        seriesL.getData().get(0).setYValue(206);
-//        seriesL.getData().get(1).setYValue(931);
-//        seriesL.getData().get(2).setYValue(950);
-//        seriesL.getData().get(3).setYValue(707);
-//        seriesL.getData().get(4).setYValue(131);
-//        seriesL.getData().get(5).setYValue(320);
-//        seriesL.getData().get(6).setYValue(6);
-//        seriesL.getData().get(7).setYValue(835);
-//        seriesL.getData().get(8).setYValue(306);
-//        seriesL.getData().get(9).setYValue(940);
+
         return seriesL;
     }
 
