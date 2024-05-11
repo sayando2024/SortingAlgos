@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0488c97-f5eb-453b-bcf5-a12dc15c3e8c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/birthday/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_swt1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx_swt1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SortingAlgos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SortingAlgos.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/SimpleBarPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/SimpleBarPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/birthday/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/birthday/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +40,7 @@
     "Application.SimpleBarPanel.executor": "Run",
     "Application.SwappingValueBarGraph.executor": "Run",
     "Application.Table.executor": "Run",
+    "Application.TestMain.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
